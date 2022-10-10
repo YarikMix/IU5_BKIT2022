@@ -1,18 +1,13 @@
 class Unique(object):
-    def __init__(self, items, **kwargs):
+    def __init__(self, items, ignore_case=False):
         self.r = []
     
-        for key, value in kwargs.items():
-            if key == "ignore_case" and value == True:
-                try:
-                    items = [i.lower() for i in items]
-                finally:
-                    break
+        if ignore_case:
+            items = [i.lower() for i in items]
 
         for i in items:
             if i not in self.r:
                 self.r.append(i)
-
 
     def __next__(self):
         if self.begin < len(self.r):
@@ -26,19 +21,15 @@ class Unique(object):
         self.begin = 0
         return self
 
-def print_test(test):
-    print('-' * 50)
-    for i in test:
+def print_test(data, ignore_case=False):
+    print("-" * 50)
+    for i in Unique(data, ignore_case):
         print(i)
 
 if __name__ == '__main__':
     data = [1, 4, 87, 3, 5, 7, 2, 4, 6, 4, 3, 6, 3, 4, 2]
-    test = Unique(data)
-    print_test(test)
-
-    data = ['A', 'a', 'B', 'b']
-    test = Unique(data)
     print_test(data)
 
-    test = Unique(data, ignore_case=True)
+    data = ["a", "A", "b", "B", "a", "A", "b", "B"]
     print_test(data)
+    print_test(data, True)

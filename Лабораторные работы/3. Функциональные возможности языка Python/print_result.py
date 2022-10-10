@@ -1,8 +1,8 @@
 def print_result(f):
-    def wrapper():
+    def wrapper(*args, **kwargs):
         print(f.__name__)
 
-        res = f()
+        res = f(*args, **kwargs)
         if type(res) == list:
             for i in res: 
                 print(i)
@@ -37,9 +37,15 @@ def test_3():
 def test_4():
     return [1, 2]
 
+
+@print_result
+def test_5(a, b):
+    return a + b
+
 if __name__ == '__main__':
     print('!!!!!!!!')
     test_1()
     test_2()
     test_3()
     test_4()
+    test_5(10, 15)

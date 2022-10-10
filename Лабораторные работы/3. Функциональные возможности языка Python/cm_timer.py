@@ -4,6 +4,7 @@ from contextlib import contextmanager
 class cm_timer_1():
     def __enter__(self):
         self.start_time = time.time()
+        
     def __exit__(self, type, value, traceback):
         print("time:", time.time() - self.start_time)
 
