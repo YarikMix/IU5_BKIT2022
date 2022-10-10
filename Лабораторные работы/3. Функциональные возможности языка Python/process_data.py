@@ -25,14 +25,6 @@ def f4(arg):
 	_str = [f"{a}, зарплата {b} руб." for a,b in _zip]
 	return _str
 
-# print(len(data))
-# print(len([i for i in f1(data)]))
-# print(len([i for i in f2(f1(data))]))
-# print(len([i for i in f3(f2(f1(data)))]))
-# print(f3(f2(f1(data))))
-# print([i for i in f4(f3(f2(f1(data))))])
-
-
 if __name__ == '__main__':
 	with cm_timer_1():
 		for i in f4(f3(f2(f1(data)))):
