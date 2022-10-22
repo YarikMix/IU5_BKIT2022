@@ -16,5 +16,5 @@ def field(items, *args):
     return r
 
 if __name__=="__main__":
-  for g in field(goods, "title", "price"):
+  for g in field(goods, "title", "price", "amount"):
       print(g)

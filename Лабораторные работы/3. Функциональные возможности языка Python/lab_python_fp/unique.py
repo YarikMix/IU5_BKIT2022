@@ -28,8 +28,12 @@ def print_test(data, ignore_case=False):
 
 if __name__ == '__main__':
     data = [1, 4, 87, 3, 5, 7, 2, 4, 6, 4, 3, 6, 3, 4, 2]
+    test = Unique(data)
+    print_test(test)
+
+    data = ['A', 'a', 'B', 'b']
+    test = Unique(data)
     print_test(data)
 
-    data = ["a", "A", "b", "B", "a", "A", "b", "B"]
+    test = Unique(data, ignore_case=True)
     print_test(data)
-    print_test(data, True)
