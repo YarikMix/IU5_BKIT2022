@@ -1,28 +1,32 @@
 import math
 import sys
 
+
 def calculate(A, B, C):
 	if type(A) not in [int, float]:
-		raise TypeError("A must be real number only!")
+		raise TypeError("Коэффициент A должен быть положительным вещественным числом!")
 	if type(B) not in [int, float]:
-		raise TypeError("B must be real number only!")
+		raise TypeError("Коэффициент B должен быть неотрицательным вещественным числом!")
 	if type(C) not in [int, float]:
-		raise TypeError("C must be real number only!")
+		raise TypeError("Коэффициент C должен быть неотрицательным вещественным числом!")
+
+	if A == 0:
+		raise ValueError("Коэффициент A должен быть положительным вещественным числом!")
 
 	D = B * B - 4 * A * C
 
 	if D > 0:
-		t = (-B - math.sqrt(D)) / 2 * A
+		t = (-B - math.sqrt(D)) / (2 * A)
 		if t > 0:
-			x1 = math.sqrt((-B + math.sqrt(D)) / 2 * A)
+			x1 = math.sqrt((-B + math.sqrt(D)) / (2 * A))
 			x2 = -x1
-			x3 = math.sqrt((-B - math.sqrt(D)) / 2 * A)
+			x3 = math.sqrt((-B - math.sqrt(D)) / (2 * A))
 			x4 = -x3
-			return (x1, x2, x3, x4)
+			return tuple(sorted(set([x1, x2, x3, x4])))
 	elif D == 0:
 		x1 = math.sqrt(-B / 2 * A)
 		x2 = -x1
-		return (x1, x2)
+		return tuple(sorted(set([x1, x2])))
 
 	return ()
 

@@ -5,11 +5,11 @@ def calculate():
 	D = B * B - 4 * A * C
 	print(f"D = {D}")
 	if D > 0:
-		t = (-B - math.sqrt(D)) / 2 * A
+		t = (-B - math.sqrt(D)) / (2 * A)
 		if t > 0:
-			x1 = math.sqrt((-B + math.sqrt(D)) / 2 * A)
+			x1 = math.sqrt((-B + math.sqrt(D)) / (2 * A))
 			x2 = -x1
-			x3 = math.sqrt((-B - math.sqrt(D)) / 2 * A)
+			x3 = math.sqrt((-B - math.sqrt(D)) / (2 * A))
 			x4 = -x3
 			print(f"x₁ = {x1}")
 			print(f"x₂ = {x2}")
