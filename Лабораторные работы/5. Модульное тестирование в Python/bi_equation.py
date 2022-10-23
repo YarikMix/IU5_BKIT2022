@@ -1,9 +1,16 @@
 import math
 import sys
 
-def calculate():
+def calculate(A, B, C):
+	if type(A) not in [int, float]:
+		raise TypeError("A must be real number only!")
+	if type(B) not in [int, float]:
+		raise TypeError("B must be real number only!")
+	if type(C) not in [int, float]:
+		raise TypeError("C must be real number only!")
+
 	D = B * B - 4 * A * C
-	print(f"D = {D}")
+
 	if D > 0:
 		t = (-B - math.sqrt(D)) / 2 * A
 		if t > 0:
@@ -11,19 +18,13 @@ def calculate():
 			x2 = -x1
 			x3 = math.sqrt((-B - math.sqrt(D)) / 2 * A)
 			x4 = -x3
-			print(f"x₁ = {x1}")
-			print(f"x₂ = {x2}")
-			print(f"x₃ = {x3}")
-			print(f"x₄ = {x4}")
-		else:
-			print("Действительных корней нет")
+			return (x1, x2, x3, x4)
 	elif D == 0:
 		x1 = math.sqrt(-B / 2 * A)
 		x2 = -x1
-		print(f"x₁ = {x1}")
-		print(f"x₂ = {x2}")
-	else:
-		print("Корней нет")
+		return (x1, x2)
+
+	return ()
 
 def main():
 	A = 1
@@ -60,7 +61,13 @@ def main():
 				print("Коэффициент С введен некорректно!")
 				pass
 				
-	calculate(A, B, C)
+	roots = calculate(A, B, C)
+	if (len(roots)) > 0:
+		print("Корни:")
+		for root in roots:
+			print(root + ", ")
+	else:
+		print("Корней нет!")
 		
 if __name__ == "__main__":
 	main()
