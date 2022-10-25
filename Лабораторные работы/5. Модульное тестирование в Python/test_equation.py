@@ -1,5 +1,5 @@
 import unittest
-from bi_equation import calculate
+from equation import calculate
 
 class TestEquation(unittest.TestCase):
 
