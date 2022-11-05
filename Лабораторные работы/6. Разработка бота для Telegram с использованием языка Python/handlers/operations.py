@@ -2,7 +2,6 @@ import logging
 
 from aiogram.dispatcher import FSMContext
 from aiogram.dispatcher.filters import Command
-from aiogram.dispatcher.filters.state import State, StatesGroup
 from aiogram.types import Message, CallbackQuery
 
 from keyboards.choice_buttons import choice
@@ -12,11 +11,7 @@ from utils.balance import getBalance, changeBalance
 
 from config import ADMIN_ID
 
-
-# States
-class Form(StatesGroup):
-    deposit_money = State()
-    derived_money = State()
+from states.form import Form
 
 
 @dp.message_handler(Command("start"))
@@ -34,7 +29,7 @@ async def get_balance(call: CallbackQuery):
     await call.message.answer(f"Ваш баланс: {getBalance()} рублей")
 
 
-@dp.callback_query_handler(text="deposit_money")
+@dp.callback_query_handler(text="deposit_money", state=None)
 async def on_deposit_money_pressed(call: CallbackQuery):
     await call.answer(cache_time=60)
 
@@ -51,9 +46,6 @@ async def process_age_invalid(message: Message):
 
 @dp.message_handler(state=Form.deposit_money)
 async def process_deposit_money(message: Message, state: FSMContext):
-    async with state.proxy() as data:
-        data["input_deposit"] = message.text
-
     oldBalance = getBalance()
     newBalance = oldBalance + int(message.text)
     changeBalance(newBalance)
@@ -65,7 +57,7 @@ async def process_deposit_money(message: Message, state: FSMContext):
     await message.reply(f"Баланс пополнен на {message.text} рублей", reply_markup=choice)
 
 
-@dp.callback_query_handler(text="derive_money")
+@dp.callback_query_handler(text="derive_money", state=None)
 async def on_derive_money_pressed(call: CallbackQuery):
     await call.answer(cache_time=60)
 
@@ -87,9 +79,6 @@ async def process_age_invalid(message: Message):
 
 @dp.message_handler(state=Form.derived_money)
 async def process_derived_money(message: Message, state: FSMContext):
-    async with state.proxy() as data:
-        data["input_derived"] = message.text
-
     oldBalance = getBalance()
     newBalance = oldBalance - int(message.text)
     changeBalance(newBalance)
