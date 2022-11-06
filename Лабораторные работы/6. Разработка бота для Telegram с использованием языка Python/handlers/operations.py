@@ -12,12 +12,7 @@ from utils.balance import getBalance, changeBalance
 from config import ADMIN_ID
 
 
-@dp.message_handler(Command("start"))
-async def show_menu(message: Message):
-    await message.answer(text="Сбербанк банкомат", reply_markup=choice)
-
-
-@dp.message_handler(Command("help"))
+@dp.message_handler(commands=["start", "help"])
 async def show_menu(message: Message):
     await message.answer(text="Сбербанк банкомат", reply_markup=choice)
 
