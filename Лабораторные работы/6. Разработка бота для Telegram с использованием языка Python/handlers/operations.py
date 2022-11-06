@@ -11,8 +11,6 @@ from utils.balance import getBalance, changeBalance
 
 from config import ADMIN_ID
 
-from states.form import Form
-
 
 @dp.message_handler(Command("start"))
 async def show_menu(message: Message):
@@ -29,73 +27,32 @@ async def get_balance(call: CallbackQuery):
     await call.message.answer(f"Ваш баланс: {getBalance()} рублей")
 
 
-@dp.callback_query_handler(text="deposit_money", state=None)
+@dp.callback_query_handler(text="deposit_money")
 async def on_deposit_money_pressed(call: CallbackQuery):
     await call.answer(cache_time=60)
 
-    await Form.deposit_money.set()
-
-    await call.message.answer("Пожалуйста введите размер суммы для пополнения")
-
-
-# Проверка на число
-@dp.message_handler(lambda message: not message.text.isdigit(), state=Form.deposit_money)
-async def process_age_invalid(message: Message):
-    return await message.reply("Пожалуйста введите число!\n")
-
-
-@dp.message_handler(state=Form.deposit_money)
-async def process_deposit_money(message: Message, state: FSMContext):
-    oldBalance = getBalance()
-    newBalance = oldBalance + int(message.text)
+    newBalance = getBalance() + 100
     changeBalance(newBalance)
 
-    await state.finish()
-
-    logging.info(f"Баланс пользователя {ADMIN_ID} увеличен на {message.text} рублей")
+    logging.info(f"Баланс пользователя {ADMIN_ID} увеличен на 100 рублей")
     logging.info(f"Текущий баланс пользователя {ADMIN_ID} составляет {getBalance()} рублей")
-    await message.reply(f"Баланс пополнен на {message.text} рублей", reply_markup=choice)
+    await call.message.answer("Баланс пополнен на 100 рублей", reply_markup=choice)
 
 
-@dp.callback_query_handler(text="derive_money", state=None)
+@dp.callback_query_handler(text="derive_money")
 async def on_derive_money_pressed(call: CallbackQuery):
     await call.answer(cache_time=60)
 
-    await Form.derived_money.set()
-
-    await call.message.answer("Пожалуйста введите размер суммы для вывода")
-
-
-# Проверка на число
-@dp.message_handler(lambda message: not message.text.isdigit(), state=Form.derived_money)
-async def process_age_invalid(message: Message):
-    return await message.reply("Пожалуйста введите число!\n")
-
-# Размер суммы для вывода должен быть не меньше текущего баланса
-@dp.message_handler(lambda message: message.text.isdigit() and int(message.text) > getBalance(), state=Form.derived_money)
-async def process_age_invalid(message: Message):
-    return await message.reply("Недостаточно средств для вывода!\n")
-
-
-@dp.message_handler(state=Form.derived_money)
-async def process_derived_money(message: Message, state: FSMContext):
-    oldBalance = getBalance()
-    newBalance = oldBalance - int(message.text)
+    newBalance = getBalance() - 100
     changeBalance(newBalance)
 
-    await state.finish()
-
-    logging.info(f"Баланс пользователя {ADMIN_ID} уменьшен на {message.text} рублей")
+    logging.info(f"Баланс пользователя {ADMIN_ID} уменьшен на 100 рублей")
     logging.info(f"Текущий баланс пользователя {ADMIN_ID} составляет {getBalance()} рублей")
-    await message.reply(f"Вы вывели {message.text} рублей", reply_markup=choice)
+    await call.message.answer("Вы вывели 100 рублей", reply_markup=choice)
 
 
-@dp.callback_query_handler(state="*", text="cancel")
-async def cancel_buying(call: CallbackQuery, state: FSMContext):
-    current_state = await state.get_state()
-    if current_state is not None:
-        await state.finish()
-
+@dp.callback_query_handler(text="cancel")
+async def cancel_buying(call: CallbackQuery):
     logging.info(f"Нажата кнопка выхода")
 
     # Ответим в окошке с уведомлением!
