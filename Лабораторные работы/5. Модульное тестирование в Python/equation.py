@@ -24,9 +24,11 @@ def calculate(A, B, C):
 			x4 = -x3
 			return tuple(sorted(set([x1, x2, x3, x4])))
 	elif D == 0:
-		x1 = math.sqrt(-B / 2 * A)
-		x2 = -x1
-		return tuple(sorted(set([x1, x2])))
+		t = -B / (2 * A)
+		if t > 0:
+			x1 = math.sqrt(t)
+			x2 = -x1
+			return tuple(sorted(set([x1, x2])))
 
 	return ()
 

@@ -7,9 +7,9 @@ def calculate(A, B, C):
 	if D > 0:
 		t = (-B - math.sqrt(D)) / (2 * A)
 		if t > 0:
-			x1 = math.sqrt(t)
+			x1 = math.sqrt((-B - math.sqrt(D)) / (2 * A))
 			x2 = -x1
-			x3 = math.sqrt(t)
+			x3 = math.sqrt((-B + math.sqrt(D)) / (2 * A))
 			x4 = -x3
 			print(f"x₁ = {x1}")
 			print(f"x₂ = {x2}")
