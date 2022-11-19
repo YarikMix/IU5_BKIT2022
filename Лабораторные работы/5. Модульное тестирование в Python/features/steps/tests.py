@@ -9,7 +9,8 @@ def given_increment(context, A: {str}, B: {str}, C: {str}):
 
 @When("we calculate {object}")
 def given_increment(context, object: {str}):
-	context.results = calculate(context.A, context.B, context.C)
+	if (object == "roots"):
+		context.results = calculate(context.A, context.B, context.C)
 
 @Then("we should see root1 {root1} root2 {root2} root3 {root3} root4 {root4}")
 def then_results(context, root1: {str}, root2: {str}, root3: {str}, root4: {str}):
