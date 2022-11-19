@@ -12,5 +12,7 @@
 
 ### Рубежные контроли:
 - [Рубежный контроль №1](https://github.com/YarikMix/IU5_BKIT2022/tree/main/%D0%A0%D0%9A/%D0%A0%D0%9A1)
+- [Рубежный контроль №2]()
 
 ### Домашнее задание:
+- [Домашнее задание](https://github.com/YarikMix/IU5_BKIT2022/tree/main/%D0%94%D0%97)
