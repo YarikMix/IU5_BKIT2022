@@ -1,15 +1,15 @@
 import math
 import sys
 
-def calculate():
+def calculate(A, B, C):
 	D = B * B - 4 * A * C
 	print(f"D = {D}")
 	if D > 0:
 		t = (-B - math.sqrt(D)) / (2 * A)
 		if t > 0:
-			x1 = math.sqrt((-B + math.sqrt(D)) / (2 * A))
+			x1 = math.sqrt(t)
 			x2 = -x1
-			x3 = math.sqrt((-B - math.sqrt(D)) / (2 * A))
+			x3 = math.sqrt(t)
 			x4 = -x3
 			print(f"x₁ = {x1}")
 			print(f"x₂ = {x2}")
@@ -18,10 +18,14 @@ def calculate():
 		else:
 			print("Действительных корней нет")
 	elif D == 0:
-		x1 = math.sqrt(-B / 2 * A)
-		x2 = -x1
-		print(f"x₁ = {x1}")
-		print(f"x₂ = {x2}")
+		t = -B / (2 * A)
+		if t > 0:
+			x1 = math.sqrt(t)
+			x2 = -x1
+			print(f"x₁ = {x1}")
+			print(f"x₂ = {x2}")
+		else:
+			print("Действительных корней нет")	
 	else:
 		print("Корней нет")
 
@@ -61,6 +65,7 @@ def main():
 				pass
 				
 	calculate(A, B, C)
+		
 		
 if __name__ == "__main__":
 	main()
