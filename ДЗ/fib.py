@@ -11,4 +11,5 @@ def fibonacci(n):
         yield fib1
 
 if __name__ == '__main__':
+    print("Первые 10 чисел Фибоначии")
     print(*fibonacci(10))
