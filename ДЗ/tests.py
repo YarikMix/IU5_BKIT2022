@@ -10,9 +10,11 @@ class TestEquation(unittest.TestCase):
 		self.assertEqual(list(fibonacci(5)), [1, 1, 2, 3, 5])
 
 	def test_iteration(self):
-		res = fibonacci(2)
+		res = fibonacci(4)
 		self.assertEqual(next(res), 1)
 		self.assertEqual(next(res), 1)
+		self.assertEqual(next(res), 2)
+		self.assertEqual(next(res), 3)
 
 	def test_value(self):
 		with self.assertRaises(ValueError) as e:

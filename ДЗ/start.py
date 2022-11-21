@@ -10,7 +10,7 @@ def hello_world():
 	return "Hello, world"
 
 @app.route('/fibonacci')
-def print_fibonacci1():
+def print_fibonacci():
 	n = request.args.get("n")
 	return " ".join(map(str, fibonacci(int(n))))
 
