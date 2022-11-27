@@ -21,9 +21,9 @@ class Unique(object):
         self.begin = 0
         return self
 
-def print_test(data, ignore_case=False):
+def print_test(data):
     print("-" * 50)
-    for i in Unique(data, ignore_case):
+    for i in data:
         print(i)
 
 if __name__ == '__main__':
@@ -33,7 +33,7 @@ if __name__ == '__main__':
 
     data = ['A', 'a', 'B', 'b']
     test = Unique(data)
-    print_test(data)
+    print_test(test)
 
     test = Unique(data, ignore_case=True)
-    print_test(data)
+    print_test(test)
